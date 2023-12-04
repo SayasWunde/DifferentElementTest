@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
@@ -16,12 +17,12 @@ class EntryPoint
     static void Main()
     {
         /*try catch statement for element that cant be found*/
-        /* string url = "https://testing.todorvachev.com/css-path/"; 
+         string url = "https://testing.todorvachev.com/css-path/"; 
          string cssPath = "#post-108 > div > figure > img";
          IWebElement element;
          IWebDriver driver = new ChromeDriver();
          driver.Navigate().GoToUrl(url);
-         Thread.Sleep(3000);
+        /* Thread.Sleep(3000);
          try 
          {
              element = driver.FindElement(By.CssSelector(cssPath));
@@ -127,24 +128,38 @@ class EntryPoint
              Console.WriteLine("something went wrong");
          }*/
 
-
+        /*
         string url = "http://google.com";
         string screeshotdirectory = Directory.GetCurrentDirectory();/*The path of the corrent directory*/
-        driver.Navigate().GoToUrl(url);
+        /*driver.Navigate().GoToUrl(url);
         /*The line below will paste on the console the location of the current directory*/
-        System.Console.WriteLine(Directory.GetCurrentDirectory());
-       Screenshot googleScreenshot = ((ITakesScreenshot)driver).GetScreenshot();
-        /*Create directory in the current project location + give it a name "screenshot" */
-        if(Directory.Exists(screeshotdirectory))/*If the directory existe dont create anotherone , if it dont then yes*/
-        {   /*Creating new directory*/
-            Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\screenshot");
-        }
-       
-         googleScreenshot.SaveAsFile(Directory.GetCurrentDirectory()+ @"\screenshot\googlescreenshot.png", ScreenshotImageFormat.Png);
+        /* System.Console.WriteLine(Directory.GetCurrentDirectory());
+        Screenshot googleScreenshot = ((ITakesScreenshot)driver).GetScreenshot();
+         /*Create directory in the current project location + give it a name "screenshot" */
+        /* if(Directory.Exists(screeshotdirectory))/*If the directory existe dont create anotherone , if it dont then yes*/
+        /*{   /*Creating new directory*/
+        /*   Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\screenshot");
+       }
+
+        googleScreenshot.SaveAsFile(Directory.GetCurrentDirectory()+ @"\screenshot\googlescreenshot.png", ScreenshotImageFormat.Png);
+
+       */
+
+        string a = ("CSS Path");
+        IWebElement f =driver.FindElement(By.XPath("//*[@id=\"post-108\"]/header/h1"));
+        string b = f.Text;
+        bool c = true;
+        //Assert.Equals(a, b);
+        Assert.That(b, Is.EqualTo(a)); //Fix for string
+        Assert.That(f.Displayed, Is.EqualTo(false)) ; //fix ture
+        Console.WriteLine(f.Displayed);
+        /*if (Assert.That(a,Is.EqualTo(b)))
+        {
+            Console.WriteLine("True");
+        }*/
 
 
-
-
+        Thread.Sleep(3000);
         driver.Quit();
     }
     private static void RedMessage(string message)
@@ -159,5 +174,27 @@ class EntryPoint
         Console.WriteLine(message);
         Console.ForegroundColor = ConsoleColor.White;
     }
+    //Add changes to git hub 
+    private static string Randomcomment()
+    {
+        string comment;
+        Random random = new Random();
+        int numberOfCommentsToSelect = random.Next(1, 10);
+        String[] commentToselect = {
+                "Its a nice day today",
+                "Hellow world ",
+                "My name is Sayas",
+                "I live in Israel",
+                "Shana Tova",
+                "I have a red car ",
+                "The sky are blue" ,
+                "Have a nice day ",
+                "Let watch a movie",
+                "Yesterday i ate pizza"
+            };
+        comment = commentToselect[numberOfCommentsToSelect];
+        return comment;
+    } 
+
 }
 
